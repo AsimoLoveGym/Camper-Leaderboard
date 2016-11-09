@@ -28,7 +28,7 @@
         <div class="col-xs-12">
           <h1 id="app-title" class="text-center">Free Code Camp Leaderboard</h1>
           <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover" id="leaderboard-table">
               <caption>
                 Recent for points in past 30 days
               </caption>
@@ -42,12 +42,11 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Camper</th>
-                  <th scope="col">Recent   <span class="badge badge-on"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></th>
-                  <th scope="col">Total   <span class="badge"><i class="fa fa-sort" aria-hidden="true"></i></span></th>
-
+                  <th scope="col" id="recent-points">Recent   <span class="badge badge-on"><i class="fa fa-sort-desc" aria-hidden="true"></i></span></th>
+                  <th scope="col" id="total-points">Total   <span class="badge"><i class="fa fa-sort" aria-hidden="true"></i></span></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="leaderboard-tbody">
                 <tr>
                   <td>1  <span class="badge badge-gold"><i class="fa fa-trophy" aria-hidden="true"></i></span></td>
                   <td>Zhuangzhuang Xia</td>

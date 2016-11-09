@@ -1,4 +1,6 @@
-$("#recent-points").click(function(){
+"use strict";
+
+$("#recent-points").click(function () {
   var queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
   $.get(queryString, successFunction);
 });
