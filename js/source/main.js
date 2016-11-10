@@ -111,7 +111,9 @@ class App extends React.Component {
 
 // The App will initialized with recent points sorting
 $(document).ready(function() {
-  const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  // For error handler test
+  // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
   $.get(queryString, successFunction).fail(function(jqXHR, textStatus) {
     alert( "Status: " + jqXHR.status + "\n" +"Detail: " + jqXHR.statusText);
   });
