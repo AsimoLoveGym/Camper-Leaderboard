@@ -1,7 +1,6 @@
 "use strict";
 
 function ObjectRow(props) {
-  // const tableContents = props.tableContents;
   const userURL = "https://www.freecodecamp.com/"+props.item.username;
   let ranking = null;
   switch (props.index + 1) {
@@ -27,7 +26,6 @@ function ObjectRow(props) {
 }
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -39,12 +37,11 @@ class App extends React.Component {
   }
 
   recentSort() {
+    // if current sorting is already recentSort, not necessary for sorting
     if (this.state.recentSorting) {
       return
     }
-
     let data = this.state.tableData.slice();
-    console.log(data);
     data.sort(function(a,b){
       return a.recent < b.recent ? 1 : -1;
     })
@@ -55,12 +52,11 @@ class App extends React.Component {
   }
 
   totalSort() {
+    // if current sorting is already totalSort, not necessary for sorting
     if (!this.state.recentSorting) {
       return
     }
-
     let data = this.state.tableData.slice();
-    console.log(data);
     data.sort(function(a,b){
       return a.alltime < b.alltime ? 1 : -1;
     })
@@ -70,26 +66,19 @@ class App extends React.Component {
     });
   }
 
-// function App(props) {
   render() {
-
-    // const tableData = props.tableData;
-
-    // function handleClick() {
-    //   console.log("success 1");
-    // }
     const isRecentSorting = this.state.recentSorting;
     let recentColWithBadge = null;
     let totalColWithBadge = null;
-
     if (isRecentSorting) {
+      // badge will indicate current sorting based on Recent points
       recentColWithBadge = <th scope="col" id="recent-points" onClick={this.totalSort}>Recent   <span className="badge badge-on"><i className="fa fa-sort-desc" aria-hidden="true"></i></span></th>
       totalColWithBadge = <th scope="col" id="total-points" onClick={this.recentSort}>Total   <span className="badge"><i className="fa fa-sort" aria-hidden="true"></i></span></th>
     } else {
+      // badge will indicate current sorting based on Total points
       recentColWithBadge = <th scope="col" id="recent-points" onClick={this.totalSort}>Recent   <span className="badge"><i className="fa fa-sort" aria-hidden="true"></i></span></th>
       totalColWithBadge = <th scope="col" id="total-points" onClick={this.recentSort}>Total   <span className="badge badge-on"><i className="fa fa-sort-desc" aria-hidden="true"></i></span></th>
     }
-
 
     return(
       <table id="dispay-table" className="table table-striped table-bordered table-hover">
@@ -120,40 +109,15 @@ class App extends React.Component {
   }
 }
 
-
-
+// The App will initialized with recent points sorting
 $(document).ready(function() {
-  const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
-  $.get(queryString, successFunction);
-
-  // $("#recent-points").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
-  //   // $.get(queryString, successFunction);
-  //   console.log("recent click works");
-  //
-  // });
-  //
-  // $("#total-points").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/alltime";
-  //   // $.get(queryString, successFunction);
-  //
-  //   console.log("total click works");
-  // });
-  //
-  // $("#app-title").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/alltime";
-  //   // $.get(queryString, successFunction);
-  //
-  //   console.log("For try");
-  // });
-
+  const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  $.get(queryString, successFunction).fail(function(jqXHR, textStatus) {
+    alert( "Status: " + jqXHR.status + "\n" +"Detail: " + jqXHR.statusText);
+  });
 });
 
-
-
-
 function successFunction(data, status) {
-  // console.log(data);
   ReactDOM.render(
     <App tableData={data}/>,
     document.getElementById('table-container')

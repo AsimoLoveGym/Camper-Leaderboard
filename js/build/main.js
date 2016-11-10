@@ -11,7 +11,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function ObjectRow(props) {
-  // const tableContents = props.tableContents;
   var userURL = "https://www.freecodecamp.com/" + props.item.username;
   var ranking = null;
   switch (props.index + 1) {
@@ -92,12 +91,11 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: "recentSort",
     value: function recentSort() {
+      // if current sorting is already recentSort, not necessary for sorting
       if (this.state.recentSorting) {
         return;
       }
-
       var data = this.state.tableData.slice();
-      console.log(data);
       data.sort(function (a, b) {
         return a.recent < b.recent ? 1 : -1;
       });
@@ -109,12 +107,11 @@ var App = function (_React$Component) {
   }, {
     key: "totalSort",
     value: function totalSort() {
+      // if current sorting is already totalSort, not necessary for sorting
       if (!this.state.recentSorting) {
         return;
       }
-
       var data = this.state.tableData.slice();
-      console.log(data);
       data.sort(function (a, b) {
         return a.alltime < b.alltime ? 1 : -1;
       });
@@ -123,23 +120,14 @@ var App = function (_React$Component) {
         recentSorting: false
       });
     }
-
-    // function App(props) {
-
   }, {
     key: "render",
     value: function render() {
-
-      // const tableData = props.tableData;
-
-      // function handleClick() {
-      //   console.log("success 1");
-      // }
       var isRecentSorting = this.state.recentSorting;
       var recentColWithBadge = null;
       var totalColWithBadge = null;
-
       if (isRecentSorting) {
+        // badge will indicate current sorting based on Recent points
         recentColWithBadge = React.createElement(
           "th",
           { scope: "col", id: "recent-points", onClick: this.totalSort },
@@ -161,6 +149,7 @@ var App = function (_React$Component) {
           )
         );
       } else {
+        // badge will indicate current sorting based on Total points
         recentColWithBadge = React.createElement(
           "th",
           { scope: "col", id: "recent-points", onClick: this.totalSort },
@@ -233,33 +222,16 @@ var App = function (_React$Component) {
   return App;
 }(React.Component);
 
-$(document).ready(function () {
-  var queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
-  $.get(queryString, successFunction);
+// The App will initialized with recent points sorting
 
-  // $("#recent-points").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
-  //   // $.get(queryString, successFunction);
-  //   console.log("recent click works");
-  //
-  // });
-  //
-  // $("#total-points").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/alltime";
-  //   // $.get(queryString, successFunction);
-  //
-  //   console.log("total click works");
-  // });
-  //
-  // $("#app-title").click(function () {
-  //   // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/alltime";
-  //   // $.get(queryString, successFunction);
-  //
-  //   console.log("For try");
-  // });
+
+$(document).ready(function () {
+  var queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  $.get(queryString, successFunction).fail(function (jqXHR, textStatus) {
+    alert("Status: " + jqXHR.status + "\n" + "Detail: " + jqXHR.statusText);
+  });
 });
 
 function successFunction(data, status) {
-  // console.log(data);
   ReactDOM.render(React.createElement(App, { tableData: data }), document.getElementById('table-container'));
 }
