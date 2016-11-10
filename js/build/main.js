@@ -5,6 +5,30 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function ObjectRow(props) {
   // const tableContents = props.tableContents;
   var userURL = "https://www.freecodecamp.com/" + props.item.username;
+  var ranking = null;
+  switch (props.index + 1) {
+    case 1:
+      ranking = React.createElement(
+        "span",
+        { className: "badge badge-gold" },
+        React.createElement("i", { className: "fa fa-trophy", "aria-hidden": "true" })
+      );
+      break;
+    case 2:
+      ranking = React.createElement(
+        "span",
+        { className: "badge badge-silver" },
+        React.createElement("i", { className: "fa fa-trophy", "aria-hidden": "true" })
+      );
+      break;
+    case 3:
+      ranking = React.createElement(
+        "span",
+        { className: "badge badge-bronze" },
+        React.createElement("i", { className: "fa fa-trophy", "aria-hidden": "true" })
+      );
+      break;
+  }
 
   return React.createElement(
     "tr",
@@ -12,7 +36,9 @@ function ObjectRow(props) {
     React.createElement(
       "td",
       null,
-      props.index + 1
+      props.index + 1,
+      " ",
+      ranking
     ),
     React.createElement(
       "td",
@@ -53,7 +79,7 @@ function App(props) {
   console.log(tableData);
   return React.createElement(
     "table",
-    { className: "table table-striped table-bordered table-hover" },
+    { id: "dispay-table", className: "table table-striped table-bordered table-hover" },
     React.createElement(
       "caption",
       null,

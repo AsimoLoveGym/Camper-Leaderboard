@@ -3,10 +3,22 @@
 function ObjectRow(props) {
   // const tableContents = props.tableContents;
   const userURL = "https://www.freecodecamp.com/"+props.item.username;
+  let ranking = null;
+  switch (props.index + 1) {
+    case 1:
+      ranking = <span className="badge badge-gold"><i className="fa fa-trophy" aria-hidden="true"></i></span>;
+      break;
+    case 2:
+      ranking = <span className="badge badge-silver"><i className="fa fa-trophy" aria-hidden="true"></i></span>;
+      break;
+    case 3:
+      ranking = <span className="badge badge-bronze"><i className="fa fa-trophy" aria-hidden="true"></i></span>;
+      break;
+  }
 
   return(
     <tr>
-      <td>{props.index + 1}</td>
+      <td>{props.index + 1} {ranking}</td>
       <td> <a href={userURL} target="_blank"><img src={props.item.img} className="user-img" />{props.item.username}</a></td>
       <td>{props.item.recent}</td>
       <td>{props.item.alltime}</td>
@@ -28,7 +40,7 @@ function App(props) {
   // console.log(tableItems);
   console.log(tableData);
   return(
-    <table className="table table-striped table-bordered table-hover">
+    <table id="dispay-table" className="table table-striped table-bordered table-hover">
       <caption>
         Recent for points in past 30 days
       </caption>
