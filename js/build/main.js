@@ -226,7 +226,9 @@ var App = function (_React$Component) {
 
 
 $(document).ready(function () {
-  var queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  // For error handler test
+  // const queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recentFDFDS";
+  var queryString = "https://fcctop100.herokuapp.com/api/fccusers/top/recent";
   $.get(queryString, successFunction).fail(function (jqXHR, textStatus) {
     alert("Status: " + jqXHR.status + "\n" + "Detail: " + jqXHR.statusText);
   });
